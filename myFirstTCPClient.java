@@ -39,24 +39,27 @@ public class myFirstTCPClient {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Enter quantity Qi (or -1 to finish): ");
-            int q = Integer.parseInt(sc.nextLine().trim());
-            if (q == -1) break;
-            if (q < 0 || q > 32767) {
-                System.out.println("Qi must be in range 0..32767");
-                continue;
-            }
+    System.out.print("Enter code Ci (or -1 to finish): ");
+    int c = Integer.parseInt(sc.nextLine().trim());
+    if (c == -1) break;
 
-            System.out.print("Enter code Ci: ");
-            int c = Integer.parseInt(sc.nextLine().trim());
-            if (c < 0 || c > 32767) {
-                System.out.println("Ci must be in range 0..32767");
-                continue;
-            }
+    if (c < 0 || c > 32767) {
+        System.out.println("Ci must be in range 0..32767");
+        continue;
+    }
 
-            quantities.add((short) q);
-            codes.add((short) c);
-        }
+    System.out.print("Enter quantity Qi: ");
+    int q = Integer.parseInt(sc.nextLine().trim());
+
+    if (q < 0 || q > 32767) {
+        System.out.println("Qi must be in range 0..32767");
+        continue;
+    }
+
+    // IMPORTANT: store quantity first, code second (protocol order)
+    quantities.add((short) q);
+    codes.add((short) c);
+}
 
         // Build request byte array A
         short reqNum = requestNumber++;
