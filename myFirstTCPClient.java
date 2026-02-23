@@ -196,19 +196,28 @@ public class myFirstTCPClient {
         }
 
         // Display bill
-        System.out.println("\nItem #\tDescription\t\tUnit Cost\tQuantity\tCost Per Item");
-        long running = 0;
-        for (int i = 0; i < descriptions.size(); i++) {
-            int u = unitCosts.get(i) & 0xFFFF;
-            int q = quantities.get(i) & 0xFFFF;
-            int line = u * q;
-            running += line;
+         System.out.println();
+System.out.printf("%-7s %-20s %-12s %-10s %-15s%n",
+        "Item #", "Description", "Unit Cost", "Quantity", "Cost Per Item");
 
-            System.out.printf("%d\t%s\t\t$%d\t\t%d\t\t$%d%n",
-                    (i + 1), descriptions.get(i), u, q, line);
-        }
-        System.out.println("-----------------------------------------------");
-        System.out.println("Total\t" + (totalCost & 0xFFFFFFFFL));
+long running = 0;
+
+for (int i = 0; i < descriptions.size(); i++) {
+    int u = unitCosts.get(i) & 0xFFFF;
+    int q = quantities.get(i) & 0xFFFF;
+    int line = u * q;
+    running += line;
+
+    System.out.printf("%-7d %-20s $%-11d %-10d $%-15d%n",
+            (i + 1),
+            descriptions.get(i),
+            u,
+            q,
+            line);
+}
+
+System.out.println("---------------------------------------------------------------");
+System.out.printf("%-41s %d%n", "Total", (totalCost & 0xFFFFFFFFL));
     }
 
     // ---------------- Helpers ----------------
